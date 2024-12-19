@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages 
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm
+from django.contrib.auth import logout as auth_logout
 
 def register(request):
     if request.method == 'POST':
@@ -41,3 +42,9 @@ def profile(request):
         'p_form':p_form
     }
     return render(request,'users/profile.html',context)
+
+
+
+def logout(request):
+    auth_logout(request)  # Use Django's built-in logout function
+    return render(request, 'users/logout.html')
